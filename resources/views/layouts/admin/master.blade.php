@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>LongFN</title>
+
+    <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <style>
         .sidebar-container{
@@ -26,26 +28,28 @@
           <div class="col-md-4 sidebar-container sticky-top">
             <div class="row">
               <div class="col-md-12">
+                @section('sidebar')
                 <div class="container-fluid">
                   <p>System</p>
                   <nav class="nav flex-column">
-                    <a href="/admin/user" class="nav-link">User management</a>
-                    <a href="/admin/role" class="nav-link">Role management</a>
-                    <a href="/admin/permission" class="nav-link">Permission management</a>
+                    <a href="{{ route('admin.user.index') }}" class="nav-link">User management</a>
+                    <a href="{{ route('admin.role') }}" class="nav-link">Role management</a>
+                    <a href="{{ route('admin.permission') }}" class="nav-link">Permission management</a>
                   </nav>
                   <p>Catalog</p>
                   <nav class="nav flex-column">
-                    <a href="/admin/product" class="nav-link">Product management</a>
-                    <a href="/admin/category" class="nav-link">Category management</a>
+                    <a href="{{ route('admin.product') }}" class="nav-link">Product management</a>
+                    <a href="{{ route('admin.category') }}" class="nav-link">Category management</a>
                   </nav>
                 </div>
+                @show
               </div>
             </div>
           </div>
           <div class="col-md-8" style="min-height: 80vh">
             <div class="row">
               <div class="col-md-12">
-                <h3> Role Management </h3>
+                @yield('content')
               </div>
             </div>
           </div>
