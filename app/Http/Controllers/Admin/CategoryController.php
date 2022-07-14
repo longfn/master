@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.user.index');
+        return view('admin.category.index');
     }
     public function create()
     {
-        return view('admin.user.create');
+        //
     }
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $this->store($request->validated());
+        //
     }
     public function show($id)
     {
@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         //
     }
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }

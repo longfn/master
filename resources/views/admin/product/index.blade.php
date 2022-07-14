@@ -1,4 +1,4 @@
 @extends('layouts.admin.master')
-@section
+@section('content')
   <h3> Product Manager </h3>
 @endsection
