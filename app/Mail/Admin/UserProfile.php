@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmationMail extends Mailable
+class UserProfile extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,8 @@ class ConfirmationMail extends Mailable
     public function build()
     {
         $targetUser = $this->target->all();
-        return $this->view('mails.confirmation', [
+
+        return $this->view('mails.inform-user-profile-mail', [
             'user' => $targetUser,
         ]);
     }

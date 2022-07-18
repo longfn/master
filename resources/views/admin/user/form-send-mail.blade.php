@@ -5,14 +5,14 @@
   <div class="d-flex justify-content-between">
     <p style="font-weight: bold;"> Send email to user </p>
     <div>
-      <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Back</a>
+      <a href="{{ route('admin.user.index') }}" class="btn btn-primary">Back</a>
     </div>
   </div>
   <form method="post" action="{{ route('admin.user.send') }}">
     @csrf
     <select class="form-control" name="mail">
       <option value="all">Select a user</option>
-      @isset($users)
+      @if(!empty($users))
         @foreach($users as $key => $user)
         <option value="{{ $user['email'] }}">{{ $user['email'] }}</option>
         @endforeach

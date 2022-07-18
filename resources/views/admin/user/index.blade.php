@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-between">
     <p style="font-weight: bold;">User List</p>
     <div>
-      <a href="{{ route('admin.user.sendmail') }}" class="btn btn-primary">Send mail</a>
+      <a href="{{ route('admin.user.form-send-email') }}" class="btn btn-primary">Send mail</a>
       <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Create</a>
     </div>
   </div>
@@ -17,10 +17,10 @@
             <th> Email </th>
             <th> Action </th>
         </tr>
-        @isset($users)
-        @foreach($users as $key => $user)
+        @if(!empty($users))
+        @foreach($users as $user)
         <tr>
-            <td></td>
+            <td> Avatar </td>
             <td> {{ $user['name'] }} </td>
             <td> {{ $user['email'] }} </td>
             <td>
@@ -29,7 +29,7 @@
             </td>
         </tr>
         @endforeach
-        @endisset
+        @endif
     </table>
   </div>
 </div>

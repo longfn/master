@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Admin\ConfirmationMail;
+use App\Mail\Admin\UserProfile;
 
 class MailService
 {
-    public function sendConfirmation($user)
+    public function sendUserProfile($user)
     {
-        Mail::to($user['email'])->send(new ConfirmationMail($user));
+        Mail::to($user['email'])->send(new UserProfile($user));
     }
 }
