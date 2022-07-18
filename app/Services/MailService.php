@@ -2,63 +2,13 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\MailRequest;
-use Illuminate\Support\Facades\Session;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\Admin\ConfirmationMail;
 
-class MailService extends Controller
+class MailService
 {
-
-
+    public function sendConfirmation($user)
+    {
+        Mail::to($user['email'])->send(new ConfirmationMail($user));
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

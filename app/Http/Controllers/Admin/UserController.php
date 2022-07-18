@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Admin\MailRequest;
-use Mail;
-use App\Mail\Admin\ConfirmationMail;
+use App\Services\MailService;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        $this->mailService = new MailService;
+    }
     public function index()
     {
         return view('admin.user.index', [
@@ -28,7 +30,9 @@ class UserController extends Controller
         $input = $request->validated();
         $collection = collect($input);
         Session::push('user', $collection);
-        return view('admin.user.index');
+        return view('admin.user.index', [
+            'users' => Session::get('user'),
+        ]);
     }
 
     public function getMailForm() {
@@ -44,22 +48,14 @@ class UserController extends Controller
         $users = Session::get('user');
         if (!strcmp($targetMail, "all")) {
             foreach($users as $user) {
-                $targetUser = $user;
-                Mail::to($targetUser['email'])->send(new ConfirmationMail($targetUser));
-            }
-            if (Mail::flushMacros()) {
-                return response()->json('Sorry! Please try again latter');
-            } else {
-                return response()->json('Great! Successfully send in your mail');
+                $this->mailService->sendConfirmation($user);
             }
         } else {
-            $targetUser = collect($users)->firstWhere('email', $targetMail);
-            Mail::to($targetMail)->send(new ConfirmationMail($targetUser));
-            if (Mail::flushMacros()) {
-                return response()->json('Sorry! Please try again latter');
-            } else {
-                return response()->json('Great! Successfully send in your mail');
-            }
+            $user = collect($users)->firstWhere('email', $targetMail);
+            $this->mailService->sendConfirmation($user);
         }
+        return view('admin.user.index', [
+            'users' => Session::get('user'),
+        ]);
     }
 }
