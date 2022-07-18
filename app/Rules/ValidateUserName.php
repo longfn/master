@@ -12,6 +12,6 @@ class ValidateUserName implements Rule
     }
     public function message()
     {
-        return __('Tên không được bắt đầu bằng số.');
+        return 'The :attribute can not start with number.';
     }
 }

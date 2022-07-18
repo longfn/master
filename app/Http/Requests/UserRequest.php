@@ -11,6 +11,7 @@ class UserRequest extends FormRequest
     {
         return true;
     }
+
     public function rules()
     {
         return [
@@ -26,19 +27,4 @@ class UserRequest extends FormRequest
             'ytlink' => 'url'
         ];
     }
-
-    public function messages()
-	{
-	    return [
-            'name.required' => __('Bạn chưa nhập Tên.'),
-            'name.min' => __('Tên không được nhỏ hơn 2 ký tự.'),
-            'email.required' => __('Bạn chưa nhập Email.'),
-            'email.email' => __('Hãy nhập email.'),
-            'password.required' => __('Bạn chưa nhập Mật khẩu.'),
-            'password.min' => __('Mật khẩu không được nhỏ hơn 8 ký tự.'),
-            'password.confirmed' => __('Mật khẩu không khớp.'),
-            'fblink.url' => __('Link Facebook không hợp lệ'),
-            'ytlink.url' => __('Link Youtube không hợp lệ'),
-	    ];
-	}
 }
