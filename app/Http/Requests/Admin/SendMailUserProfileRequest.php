@@ -15,6 +15,7 @@ class SendMailUserProfileRequest extends FormRequest
     {
         return [
             'mail' => 'required',
+            'attachment' => '',
         ];
     }
 }

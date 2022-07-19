@@ -7,8 +7,8 @@ use App\Mail\Admin\UserProfile;
 
 class MailService
 {
-    public function sendUserProfile($user)
+    public function sendUserProfile($user, $file = null)
     {
-        Mail::to($user['email'])->send(new UserProfile($user));
+        Mail::to($user['email'])->send(new UserProfile($user, $file));
     }
 }
