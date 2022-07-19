@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MailRequest extends FormRequest
+class SendMailUserProfileRequest extends FormRequest
 {
     public function authorize()
     {

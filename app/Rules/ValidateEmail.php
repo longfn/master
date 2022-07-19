@@ -9,15 +9,9 @@ class ValidateEmail implements Rule
 {
     public function passes($attribute, $value)
     {
-        $users = Session::get('user');
-        if (!empty($users)) {
-            foreach($users as $user) {
-                if (!strcmp($value, $user['email'])) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        $users = collect(Session::get('users'));
+
+        return empty($users->firstWhere('email', $value));
     }
 
     public function message()
