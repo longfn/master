@@ -22,12 +22,12 @@
         <hr>
         <span>
           <strong style="display: inline-block; width: 48%;"> Phone </strong>
-          <emphasis style="display: inline-block; width: 48%; text-align: right;"> 0123456789 </emphasis>
+          <emphasis style="display: inline-block; width: 48%; text-align: right;"> {{ $user['phone']}} </emphasis>
         </span>
         <hr>
         <span>
           <strong style="display: inline-block; width: 48%;"> Address </strong>
-          <emphasis style="display: inline-block; width: 48%; text-align: right;"> Hanoi </emphasis>
+          <emphasis style="display: inline-block; width: 48%; text-align: right;"> {{ $user['address'] }} </emphasis>
         </span>
         <hr>
       </div>

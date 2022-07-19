@@ -29,7 +29,8 @@ class UserRequest extends FormRequest
                 new ValidateEmailUnique(),
             ],
             'password' => 'required|min:8|regex:/^[0-9@#$%&*]+$/|confirmed',
-            'address' => '',
+            'address' => 'required',
+            'phone' => 'required|numeric',
             'fblink' => 'url',
             'ytlink' => 'url',
             'description' => ''

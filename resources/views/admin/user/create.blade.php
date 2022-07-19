@@ -42,6 +42,16 @@
     <label for="address" class="form-label">Address</label>
     <input name="address" type="text" class="form-control" id="address" placeholder="">
   </div>
+  @error('address')
+    <span class="text-danger text-left">{{ $errors->first('address') }}</span>
+  @enderror
+  <div class="">
+    <label for="phone" class="form-label">Phone Number</label>
+    <input name="phone" type="text" class="form-control" id="phone" placeholder="">
+  </div>
+  @error('phone')
+    <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
+  @enderror
   <div class="">
     <label for="fblink" class="form-label">Facebook Link</label>
     <input name="fblink" type="text" class="form-control" id="fblink" placeholder="https://example.com">
