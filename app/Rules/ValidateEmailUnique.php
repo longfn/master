@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
-class ValidateEmail implements Rule
+class ValidateEmailUnique implements Rule
 {
     public function passes($attribute, $value)
     {

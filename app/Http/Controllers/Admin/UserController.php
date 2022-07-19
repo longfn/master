@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', [
-            'users' => collect(Session::get('users')),
+            'users' => getSessionUsers(),
         ]);
     }
 
@@ -32,21 +32,21 @@ class UserController extends Controller
         Session::push('users', $request->validated());
 
         return view('admin.user.index', [
-            'users' => collect(Session::get('users')),
+            'users' => getSessionUsers(),
         ]);
     }
 
     public function getMailForm()
     {
         return view('admin.user.form-send-mail', [
-            'users' => collect(Session::get('users')),
+            'users' => getSessionUsers(),
         ]);
     }
 
     public function sendMail(SendMailUserProfileRequest $request)
     {
         $targetMail = $request->validated()['mail'];
-        $users = collect(Session::get('users'));
+        $users = getSessionUsers();
 
         if (!strcmp($targetMail, "all")) {
             $users->each(function ($user) {
@@ -59,5 +59,9 @@ class UserController extends Controller
         $this->mailService->sendUserProfile($user);
 
         return redirect()->back();
+    }
+
+    private function getSessionUsers() {
+        return collect(Session::get('users'));
     }
 }

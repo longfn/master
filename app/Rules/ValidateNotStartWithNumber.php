@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidateUserName implements Rule
+class ValidateNotStartWithNumber implements Rule
 {
     public function passes($attribute, $value)
     {

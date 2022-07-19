@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\ValidateUserName;
-use App\Rules\ValidateEmail;
+use App\Rules\ValidateNotStartWithNumber;
+use App\Rules\ValidateEmailUnique;
 
 class UserRequest extends FormRequest
 {
@@ -20,13 +20,13 @@ class UserRequest extends FormRequest
                 'required',
                 'min:2',
                 'not_regex:/^[@#$%&*]/',
-                new ValidateUserName(),
+                new ValidateNotStartWithNumber(),
             ],
             'email' => [
                 'required',
                 'email',
                 'not_regex:/^[root]/',
-                new ValidateEmail(),
+                new ValidateEmailUnique(),
             ],
             'password' => 'required|min:8|regex:/^[0-9@#$%&*]+$/|confirmed',
             'address' => '',
