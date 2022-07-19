@@ -13,8 +13,8 @@
     <select class="form-control" name="mail">
       <option value="all">Select a user</option>
       @if(!empty($users))
-        @foreach($users as $key => $user)
-        <option value="{{ $user['email'] }}">{{ $user['email'] }}</option>
+        @foreach($users as $user)
+        <option value="{{ $user['email'] }}">{{ $user['name'] }}</option>
         @endforeach
       @endif
     </select>

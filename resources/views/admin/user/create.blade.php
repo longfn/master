@@ -5,9 +5,9 @@
   <div class="row">
     <div class="d-flex justify-content-between">
       <h3> Create a user </h3>
-      <button class="btn btn-primary">
+      <a href="{{ route('admin.user.index') }}" class="btn btn-primary">
         Back
-      </button>
+      </a>
     </div>
   </div>
   <div class="">

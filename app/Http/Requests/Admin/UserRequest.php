@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidateUserName;
+use App\Rules\ValidateEmail;
 
 class UserRequest extends FormRequest
 {
@@ -21,10 +22,17 @@ class UserRequest extends FormRequest
                 'not_regex:/^[@#$%&*]/',
                 new ValidateUserName(),
             ],
-            'email' => 'required|email|not_regex:/^[root]/',
+            'email' => [
+                'required',
+                'email',
+                'not_regex:/^[root]/',
+                new ValidateEmail(),
+            ],
             'password' => 'required|min:8|regex:/^[0-9@#$%&*]+$/|confirmed',
+            'address' => '',
             'fblink' => 'url',
-            'ytlink' => 'url'
+            'ytlink' => 'url',
+            'description' => ''
         ];
     }
 }

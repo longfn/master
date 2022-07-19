@@ -10,7 +10,8 @@ use App\Services\MailService;
 
 class UserController extends Controller
 {
-    public function __construct(MailService $mailService) {
+    public function __construct(MailService $mailService)
+    {
         $this->mailService = $mailService;
     }
 
@@ -28,8 +29,7 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $input = $request->validated();
-        $collection = collect($input);
+        $collection = collect($request->validated());
         Session::push('user', $collection);
 
         return view('admin.user.index', [
@@ -52,10 +52,12 @@ class UserController extends Controller
             foreach($users as $user) {
                 $this->mailService->sendUserProfile($user);
             }
+
             return redirect()->back();
         }
         $user = collect($users)->firstWhere('email', $targetMail);
         $this->mailService->sendUserProfile($user);
+
         return redirect()->back();
     }
 }

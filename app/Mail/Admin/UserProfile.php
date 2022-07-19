@@ -11,17 +11,17 @@ class UserProfile extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
+
     public function __construct($user)
     {
-        $this->target = $user;
+        $this->user = $user;
     }
 
     public function build()
     {
-        $targetUser = $this->target->all();
-
         return $this->view('mails.inform-user-profile-mail', [
-            'user' => $targetUser,
+            'user' => $this->user,
         ]);
     }
 }
