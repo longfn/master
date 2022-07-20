@@ -12,25 +12,25 @@ class UserProfile extends Mailable
     use Queueable, SerializesModels;
 
     protected $user;
-    protected $file;
+    protected $fileAttached;
 
-    public function __construct($user, $file)
+    public function __construct($user, $fileAttached = null)
     {
         $this->user = $user;
-        $this->file = $file;
+        $this->fileAttached = $fileAttached;
     }
 
     public function build()
     {
-        if (!$this->file) {
-            return $this->view('mails.inform-user-profile-mail', [
-                'user' => $this->user,
+        $mail = $this->view('mails.inform-user-profile-mail', [
+            'user' => $this->user,
+        ]);
+        if ($this->fileAttached) {
+            $mail->attach($this->fileAttached, [
+                'as' => ''.$this->fileAttached->getClientOriginalName(),
             ]);
         }
-        return $this->view('mails.inform-user-profile-mail', [
-            'user' => $this->user,
-        ])->attach($this->file, [
-            'as' => ''.$this->file->getClientOriginalName(),
-        ]);
+
+        return $mail;
     }
 }
