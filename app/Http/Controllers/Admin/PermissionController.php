@@ -10,5 +10,4 @@ class PermissionController extends Controller
     {
         return view('admin.permission.index');
     }
-
 }

@@ -53,7 +53,7 @@ class UserController extends Controller
         $users = $this->getSessionUsers();
 
         if (!strcmp($targetMail, "all")) {
-            $users->each(fn($user) => $this->mailService->sendUserProfile($user, $fileAttached));
+            $users->each(fn ($user) => $this->mailService->sendUserProfile($user, $fileAttached));
 
             return redirect()->back();
         }
