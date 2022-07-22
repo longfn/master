@@ -15,7 +15,7 @@ return new class () extends Migration {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->nullable(false)->autoIncrement();
             $table->string('room', 255)->nullable(false);
-            $table->bigInteger('sender_id')->unsigned()->nullable(false)->foreign('sender_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->bigInteger('sender_id')->nullable(false);
             $table->string('sender_type', 255)->nullable(false);
             $table->bigInteger('receiver_id')->unsigned()->nullable(false);
             $table->string('receiver_type', 255)->nullable(false);
@@ -25,6 +25,8 @@ return new class () extends Migration {
             $table->string('association_type', 255)->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
+
+            $table->foreign('sender_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

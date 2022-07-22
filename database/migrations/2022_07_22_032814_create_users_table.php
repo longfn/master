@@ -13,13 +13,13 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->primary();
             $table->string('name', 50);
             $table->string('email', 32);
             $table->string('username', 50);
             $table->string('password', 200);
             $table->string('address');
-            $table->bigInteger('school_id')->nullable()->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
+            $table->bigInteger('school_id')->nullable();
             $table->tinyInteger('type')->comment('For detect user');
             $table->integer('parent_id');
             $table->timestamp('verified_at');
@@ -33,6 +33,8 @@ return new class () extends Migration {
             $table->text('description');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
+
+            $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

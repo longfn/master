@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigInteger('id')->primary();
             $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at');
