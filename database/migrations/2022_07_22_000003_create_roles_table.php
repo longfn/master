@@ -12,9 +12,9 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('permission_groups', function (Blueprint $table) {
-            $table->integer('id')->primary();
-            $table->string('name', 255)->unique();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 255);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('permission_groups');
+        Schema::dropIfExists('roles');
     }
 };

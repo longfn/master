@@ -12,11 +12,10 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
-            $table->string('name')->unique();
+        Schema::create('permission_groups', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 255)->unique();
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at');
         });
     }
 
@@ -27,6 +26,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('permission_groups');
     }
 };

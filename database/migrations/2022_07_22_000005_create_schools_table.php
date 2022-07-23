@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('code')->unique()->nullable();
@@ -32,7 +32,7 @@ return new class () extends Migration {
             $table->string('youtube_url')->nullable();
             $table->string('fax_number')->nullable();
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
