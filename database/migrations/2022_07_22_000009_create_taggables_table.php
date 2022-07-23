@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->string('taggable_type');
             $table->tinyInteger('type')->nullable();
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at');
+            $table->softDeletes('deleted_at');
 
             $table->foreign('tag_id')->references('id')->on('tags')
                 ->onUpdate('cascade')

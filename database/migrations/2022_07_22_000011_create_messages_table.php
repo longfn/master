@@ -24,7 +24,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('association_id')->nullable()->default(null);
             $table->string('association_type', 255)->nullable()->default(null);
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at');
+            $table->softDeletes('deleted_at');
 
             $table->foreign('sender_id')->references('id')->on('users')
                 ->onUpdate('cascade')

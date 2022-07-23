@@ -23,7 +23,7 @@ return new class () extends Migration {
             $table->string('mime_type', 255)->default('');
             $table->unsignedInteger('size')->default(0);
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
