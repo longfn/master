@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
+
+    public function permissionGroup()
+    {
+        return $this->belongsTo(PermissionGroup::class);
+    }
+
+    public function rolesPermissions()
+    {
+        return $this->hasMany(RolesPermission::class);
+    }
 }

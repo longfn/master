@@ -10,4 +10,9 @@ class Message extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

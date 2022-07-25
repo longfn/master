@@ -10,4 +10,14 @@ class Taggable extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
+
+    public function taggable()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

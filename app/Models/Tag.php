@@ -10,4 +10,9 @@ class Tag extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function taggables()
+    {
+        return $this->hasMany(Taggable::class);
+    }
 }
