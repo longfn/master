@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use App\Models\RolesPermission;
+use Illuminate\Support\Facades\DB;
 use App\Models\Permission;
 use App\Models\Role;
 
@@ -12,14 +12,13 @@ class RolesPermissionSeeder extends Seeder
 {
     public function run()
     {
-        RolesPermission::factory()
-            ->count(10)
-            ->state(new Sequence(
-                fn () => [
-                    'permission_id' => Permission::all()->random(),
-                    'role_id' => Role::all()->random(),
-                ],
-            ))
-            ->create();
+        for ($x = 0; $x <= 10; $x++) {
+            DB::table('roles_permissions')->insert([
+                'permission_id' => Permission::select('id')->orderByRaw("RAND()")->first()->id,
+                'role_id' => Role::select('id')->orderByRaw("RAND()")->first()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

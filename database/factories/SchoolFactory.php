@@ -30,10 +30,10 @@ class SchoolFactory extends Factory
             'zip_code' => fake()->randomNumber(6, true),
             'attribute_information_setting_date' => now(),
             'old_school_investigation_number' => fake()->phoneNumber(),
-            'facebook_url' => null,
-            'twitter_url' => null,
-            'youtube_url' => null,
-            'fax_number' => null,
+            'facebook_url' => fake()->url(),
+            'twitter_url' => fake()->url(),
+            'youtube_url' => fake()->url(),
+            'fax_number' => fake()->phoneNumber(),
         ];
     }
 }

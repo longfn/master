@@ -20,10 +20,10 @@ class AttachmentFactory extends Factory
             'uuid' => fake()->uuid(),
             'attachable_type' => fake()->word(),
             'attachable_id' => fake()->numerify('###'),
-            'file_path' => fake()->word(),
+            'file_path' => fake()->imageUrl(),
             'file_name' => fake()->word(),
             'extension' => fake()->word(),
-            'mime_type' => fake()->word(),
+            'mime_type' => 'application/octet-stream',
             'size' => fake()->randomNumber(5, false),
         ];
     }

@@ -4,22 +4,21 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\UsersRole;
 
 class UsersRoleSeeder extends Seeder
 {
     public function run()
     {
-        UsersRole::factory()
-            ->count(16)
-            ->state(new Sequence(
-                fn () => [
-                    'user_id' => User::all()->random(),
-                    'role_id' => Role::all()->random(),
-                ],
-            ))
-            ->create();
+        for ($x = 0; $x <= 10; $x++) {
+            DB::table('users_roles')->insert([
+                'user_id' => User::select('id')->orderByRaw("RAND()")->first()->id,
+                'role_id' => Role::select('id')->orderByRaw("RAND()")->first()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

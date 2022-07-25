@@ -16,14 +16,14 @@ class User extends Model
         return $this->belongsTo(School::class);
     }
 
-    public function usersRoles()
+    public function roles()
     {
-        return $this->hasMany(UsersRole::class);
+        return $this->belongsToMany(Role::class);
     }
 
-    public function taggables()
+    public function tags()
     {
-        return $this->hasMany(Taggable::class);
+        return $this->morphedToMany(Tag::class);
     }
 
     public function messages()

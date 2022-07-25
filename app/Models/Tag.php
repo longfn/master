@@ -11,8 +11,8 @@ class Tag extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function taggables()
+    public function users()
     {
-        return $this->hasMany(Taggable::class);
+        return $this->morphedByMany(User::class, 'taggable');
     }
 }
