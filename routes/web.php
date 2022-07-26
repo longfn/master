@@ -18,3 +18,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('product', ProductController::class);
     Route::resource('permission', PermissionController::class);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
