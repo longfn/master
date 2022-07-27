@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'address' => fake()->sentence(),
             'type' => fake()->randomDigit(),
             'parent_id' => fake()->randomNumber(4, false),
-            'verified_at' => now(),
+            'verified_at' => null,
             'closed' => false,
             'code' => fake()->unique()->randomNumber(5, false),
             'social_type' => fake()->randomDigit(),

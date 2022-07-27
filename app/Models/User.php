@@ -14,6 +14,26 @@ class User extends Model implements Authenticatable
     use SoftDeletes;
     use AuthenticableTrait;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'username',
+        'password',
+        'address',
+        'school_id',
+        'type',
+        'parent_id',
+        'verified_at',
+        'closed',
+        'code',
+        'social_type',
+        'social_id',
+        'social_name',
+        'social_nickname',
+        'social_avatar',
+        'description',
+    ];
+
     public function school()
     {
         return $this->belongsTo(School::class);
