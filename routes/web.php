@@ -19,6 +19,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('permission', PermissionController::class);
 });
 
+Route::get('/', function () {
+    return redirect('/home');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
