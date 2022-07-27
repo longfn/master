@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\UserTypeAdmin;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', function () {
     return redirect()->route('admin.user.index');
-});
+})->middleware(UserTypeAdmin::class);
 Route::get('/', function () {
     return redirect('/home');
 });

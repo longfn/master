@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'] ?? '',
             'school_id' => $data['school_id'] ?? null,
-            'type' => $data['type'] ?? User::TYPE['admin'],
+            'type' => $data['type'] ?? User::TYPE['student'],
             'parent_id' => $data['parent_id'] ?? 0,
             'verified_at' => null,
             'closed' => false,
