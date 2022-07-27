@@ -36,19 +36,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'] ?? '',
-            'school_id' => $data['school_id'] ?? null,
-            'type' => $data['type'] ?? User::TYPE['student'],
-            'parent_id' => $data['parent_id'] ?? 0,
-            'verified_at' => null,
-            'closed' => false,
-            'code' => $data['code'] ?? null,
-            'social_type' => $data['social_type'] ?? 0,
-            'social_id' => $data['social_id'] ?? null,
-            'social_name' => $data['social_name'] ?? '',
-            'social_nickname' => $data['social_nickname'] ?? '',
-            'social_avatar' => $data['social_avatar'] ?? 'https://fakeimg.pl/300/',
-            'description' => $data['description'] ?? '',
+            'type' => User::TYPE['student'],
         ]);
     }
 }

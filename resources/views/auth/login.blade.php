@@ -8,6 +8,16 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                        </div>
+                    @endif
+                    @if (Session::has('verified'))
+                        <div class="alert alert-success" role="success">
+                            Your email address has been successfully verified.
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

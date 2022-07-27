@@ -6,13 +6,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserTypeAdmin
+class VerifyAdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-
-        if ($user->isAdmin()) {
+        if (Auth::user()->isAdmin()) {
             return $next($request);
         }
 

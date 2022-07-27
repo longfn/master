@@ -11,21 +11,18 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected function redirectTo()
-    {
-        $user = Auth::user();
-        switch (true) {
-            case $user->isAdmin():
-                return '/admin';
-            case $user->isStudent():
-            default:
-                return '/home';
-        }
-    }
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function redirectTo()
+    {
+        if (Auth::user()->isAdmin()) {
+            return '/admin';
+        }
+
+        return '/home';
     }
 
     public function login(LoginRequest $request)
@@ -35,11 +32,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect($this->redirectTo());
+            return redirect($this->redirectPath());
         }
 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('username');
+        return back()->with(
+            'error',
+            'The provided credentials do not match our records.',
+        );
     }
 }
