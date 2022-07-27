@@ -10,7 +10,7 @@ use App\Http\Middleware\UserTypeAdmin;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
-Route::name('admin.')->prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(UserTypeAdmin::class)->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
         Route::get('form-send-email', [UserController::class, 'getMailForm'])->name('form-send-email');
         Route::post('send', [UserController::class, 'sendMail'])->name('send');
@@ -23,12 +23,12 @@ Route::name('admin.')->prefix('admin')->group(function () {
 });
 
 Auth::routes(['verify' => true]);
+Route::get('/', function () {
+    return redirect('/home');
+});
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', function () {
     return redirect()->route('admin.user.index');
-})->middleware(UserTypeAdmin::class);
-Route::get('/', function () {
-    return redirect('/home');
 });
 Route::get('/email/verify', function () {
     return view('auth.verify');
