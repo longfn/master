@@ -19,7 +19,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(LoginRequest $request) {
+    public function login(LoginRequest $request)
+    {
         $credentials = $request->getCredentials();
 
         if (Auth::attempt($credentials)) {

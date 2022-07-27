@@ -19,7 +19,8 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function getCredentials() {
+    public function getCredentials()
+    {
         $credential = $this->validated();
         if (filter_var($credential['username'], FILTER_VALIDATE_EMAIL)) {
             return [
