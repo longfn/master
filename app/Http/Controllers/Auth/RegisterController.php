@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +12,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/email/verify';
 
     public function __construct()
     {
@@ -39,7 +38,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'address' => $data['address'] ?? '',
             'school_id' => $data['school_id'] ?? null,
-            'type' => $data['type'] ?? 0,
+            'type' => $data['type'] ?? User::TYPE['admin'],
             'parent_id' => $data['parent_id'] ?? 0,
             'verified_at' => null,
             'closed' => false,
