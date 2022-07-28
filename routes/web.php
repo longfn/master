@@ -6,8 +6,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\HomeController;
-use App\Http\Middleware\VerifyAdminMiddleware;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified', 'verify.admin'])->group(function () {
@@ -27,4 +25,3 @@ Route::get('/', function () {
     return redirect('/home');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
