@@ -10,12 +10,12 @@ use App\Http\Middleware\VerifyAdminMiddleware;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
-Route::name('admin.')->prefix('admin')->middleware('verify.admin')->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified', 'verify.admin'])->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
         Route::get('form-send-email', [UserController::class, 'getMailForm'])->name('form-send-email');
         Route::post('send', [UserController::class, 'sendMail'])->name('send');
     });
-    Route::resource('user', UserController::class)->middleware(['auth', 'verified']);
+    Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
@@ -27,10 +27,4 @@ Route::get('/', function () {
     return redirect('/home');
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/admin', function () {
-    return redirect()->route('admin.user.index');
-});
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [App\Http\Controllers\Auth\VerificationController::class, 'verify'])->name('verification.verify');
+

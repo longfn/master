@@ -14,22 +14,13 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->state([
-                'name' => 'Default Admin',
-                'email' => 'admin@example.org',
-                'username' => 'admin',
-                'password' => Hash::make('admin365'),
+                'name' => 'root',
+                'email' => 'root@gmail.com',
+                'username' => 'root',
+                'password' => Hash::make('123@123'),
                 'type' => User::TYPE['admin'],
                 'verified_at' => now(),
-                'school_id' => null,
             ])
-            ->create();
-        User::factory()
-            ->count(10)
-            ->state(new Sequence(
-                fn () => [
-                    'school_id' => School::all()->random(),
-                ],
-            ))
             ->create();
     }
 }
