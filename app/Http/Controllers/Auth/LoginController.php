@@ -36,15 +36,6 @@ class LoginController extends Controller
             );
         }
 
-        // If user must ABSOLUTELY verify email before logging in.
-        // Then, view verification.notice will never get used at all.
-        // if (!Auth::user()->hasVerifiedEmail()) {
-        //     return back()->with(
-        //         'error',
-        //         'Before proceeding, please check your email for a verification link.'
-        //     );
-        // }
-
         $request->session()->regenerate();
 
         return redirect($this->redirectPath());

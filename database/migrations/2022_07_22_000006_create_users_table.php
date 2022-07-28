@@ -25,11 +25,11 @@ return new class () extends Migration {
             $table->timestamp('verified_at')->nullable();
             $table->boolean('closed')->default(false);
             $table->string('code')->unique()->nullable();
-            $table->tinyInteger('social_type')->default(0);
+            $table->tinyInteger('social_type')->nullable();
             $table->string('social_id')->unique()->nullable();
-            $table->string('social_name')->default('');
-            $table->string('social_nickname')->default('');
-            $table->string('social_avatar')->default('');
+            $table->string('social_name')->nullable();
+            $table->string('social_nickname')->nullable();
+            $table->string('social_avatar')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at');
