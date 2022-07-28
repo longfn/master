@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @if (Session::has('error'))
                         <div class="alert alert-danger" role="alert">
-                                {{ session('error') }}
+                            {{ session('error') }}
                         </div>
                     @endif
                     @if (Session::has('verified'))

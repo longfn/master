@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect('/home');
+});
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified', 'verify.admin'])->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
         Route::get('form-send-email', [UserController::class, 'getMailForm'])->name('form-send-email');
@@ -21,7 +26,3 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified', 'verify.
 });
 
 Auth::routes(['verify' => true]);
-Route::get('/', function () {
-    return redirect('/home');
-});
-Route::get('/home', [HomeController::class, 'index'])->name('home');

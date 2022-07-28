@@ -14,7 +14,7 @@ class VerificationController extends Controller
 {
     use VerifiesEmails;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/login';
 
     public function __construct()
     {
@@ -35,6 +35,10 @@ class VerificationController extends Controller
             event(new Verified($user));
         }
 
-        return redirect($this->redirectPath())->with('verified', true);
+        return redirect($this->redirectPath())
+            ->with(
+                'verified',
+                true
+            );
     }
 }

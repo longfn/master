@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use AuthenticableTrait;
     use Notifiable;
 
-    public const TYPE = [
+    public const TYPES = [
         'admin' => 1,
         'student' => 2,
     ];
@@ -63,12 +63,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->type == self::TYPE['admin'];
+        return $this->type == self::TYPES['admin'];
     }
 
     public function isStudent()
     {
-        return $this->type == self::TYPE['student'];
+        return $this->type == self::TYPES['student'];
     }
 
     public function hasVerifiedEmail()

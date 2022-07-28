@@ -7,12 +7,14 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/email/verify';
+    protected $redirectTo = '/register';
 
     public function __construct()
     {
@@ -36,7 +38,26 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'type' => User::TYPE['student'],
+            'type' => User::TYPES['student'],
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath())
+                ->with(
+                    'message',
+                    'Account created. Please check your mailbox for verification email.'
+                );
     }
 }

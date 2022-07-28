@@ -29,15 +29,24 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect($this->redirectPath());
+        if (!Auth::attempt($credentials)) {
+            return back()->with(
+                'error',
+                'The provided credentials do not match our records.',
+            );
         }
 
-        return back()->with(
-            'error',
-            'The provided credentials do not match our records.',
-        );
+        // If user must ABSOLUTELY verify email before logging in.
+        // Then, view verification.notice will never get used at all.
+        // if (!Auth::user()->hasVerifiedEmail()) {
+        //     return back()->with(
+        //         'error',
+        //         'Before proceeding, please check your email for a verification link.'
+        //     );
+        // }
+
+        $request->session()->regenerate();
+
+        return redirect($this->redirectPath());
     }
 }
