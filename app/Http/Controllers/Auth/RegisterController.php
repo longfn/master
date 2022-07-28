@@ -14,7 +14,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/register';
+    protected $redirectTo = '/login';
 
     public function __construct()
     {
@@ -56,7 +56,7 @@ class RegisterController extends Controller
             ? new JsonResponse([], 201)
             : redirect($this->redirectPath())
                 ->with(
-                    'message',
+                    'registered',
                     'Account created. Please check your mailbox for verification email.'
                 );
     }

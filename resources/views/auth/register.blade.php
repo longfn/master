@@ -8,11 +8,6 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    @if (Session::has('message'))
-                        <div class="alert alert-success" role="success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

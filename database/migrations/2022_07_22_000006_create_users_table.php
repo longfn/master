@@ -18,10 +18,10 @@ return new class () extends Migration {
             $table->string('email', 32);
             $table->string('username', 50);
             $table->string('password', 200);
-            $table->string('address')->default('');
+            $table->string('address')->nullable();
             $table->unsignedBigInteger('school_id')->nullable();
-            $table->tinyInteger('type')->comment('For detect user')->default(0);
-            $table->integer('parent_id')->default(0);
+            $table->tinyInteger('type')->comment('For detect user')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->boolean('closed')->default(false);
             $table->string('code')->unique()->nullable();

@@ -8,9 +8,14 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    @if (Session::has('error'))
+                    @if (Session::has('loginFailed'))
                         <div class="alert alert-danger" role="alert">
-                            {{ session('error') }}
+                            {{ session('loginFailed') }}
+                        </div>
+                    @endif
+                    @if (Session::has('registered'))
+                        <div class="alert alert-success" role="success">
+                            {{ session('registered') }}
                         </div>
                     @endif
                     @if (Session::has('verified'))
