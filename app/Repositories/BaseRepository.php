@@ -3,25 +3,10 @@
 namespace App\Repositories;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Validator;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
-
-    public function __construct()
-    {
-        $this->setModel();
-    }
-
-    abstract public function getModel();
-
-    public function setModel()
-    {
-        $this->model = app()->make(
-            $this->getModel()
-        );
-    }
 
     public function paginate(array $input = [], $perPage = 10)
     {
@@ -36,11 +21,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
         ]);
     }
 
-    public function save(array $inputs, array $conditions = [])
+    public function save(array $inputs, array $conditions = ['id' => null])
     {
-        $validator = Validator::make($data, $conditions)->validate();
-
-        return $this->model->create($inputs);
+        return $this->model->updateOrCreate($conditions, $inputs);
     }
 
     public function findById($id)
@@ -50,6 +33,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function deleteById($id)
     {
-        return $this->findById($id)->delete();
+        return $this->model->destroy($id);
     }
 }
