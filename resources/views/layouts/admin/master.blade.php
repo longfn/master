@@ -1,50 +1,41 @@
-<!doctype html>
-<html lang="vi-VN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> {{ env('APP_NAME') }} </title>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg sticky-top bg-light" style="z-index: 9999">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">GOLSOFT</a>
-      </div>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-4 sidebar-container sticky-top">
-            <div class="row">
-              <div class="col-md-12">
-                @include('layouts.admin.sidebar')
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8" style="min-height: 80vh">
-            <div class="row">
-              <div class="col-md-12">
-                @yield('content')
-              </div>
-            </div>
-          </div>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <title>{{ config('app.name', 'Laravel') }}</title>
+
+  <!-- Scripts -->
+  <script src="{{ mix('js/app.js') }}" defer></script>
+
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+  <div id="app">
+    @include('partitions.header')
+
+    <main class="container-fluid py-2">
+      <div class="row mx-5">
+        <div class="col-md-4 sidebar-container sticky-top ps-0">
+          @include('partitions.sidebar')
+        </div>
+        <div class="col-md-8 border-start pe-0" style="min-height: 80vh">
+          @yield('content')
         </div>
       </div>
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-lg sticky-bottom bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">FOOTER</a>
-      </div>
-    </nav>
+    </main>
 
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-  </body>
+    @include('partitions.footer')
+  </div>
+</body>
 </html>

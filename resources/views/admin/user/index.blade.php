@@ -1,7 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
-<div class="container-fluid" style="background: lightblue;">
+<div class="container-fluid">
   <div class="d-flex justify-content-between">
     <p style="font-weight: bold;">User List</p>
     <div>
