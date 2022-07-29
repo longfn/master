@@ -26,10 +26,10 @@
 
     <main class="container-fluid py-2">
       <div class="row mx-5">
-        <div class="col-md-4 sidebar-container sticky-top ps-0">
+        <div class="col-lg-4 bg-white shadow-sm ps-0">
           @include('partitions.sidebar')
         </div>
-        <div class="col-md-8 border-start pe-0" style="min-height: 80vh">
+        <div class="col-lg-8 bg-white shadow-sm pe-0">
           @yield('content')
         </div>
       </div>

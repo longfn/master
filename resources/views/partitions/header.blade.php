@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm" style="z-index: 1200;">
   <div class="container-fluid mx-5">
     <a class="navbar-brand" href="{{ url('/') }}">
       {{ config('app.name', 'GOLSOFT') }}

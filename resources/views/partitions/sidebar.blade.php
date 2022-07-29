@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container-fluid pb-4">
   <p>System</p>
   <nav class="nav flex-column">
     <a href="{{ route('admin.user.index') }}" class="nav-link">User management</a>

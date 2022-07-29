@@ -20,9 +20,20 @@
         @if(!empty($users))
         @foreach($users as $user)
         <tr>
-            <td> Avatar </td>
-            <td> {{ $user['name'] }} </td>
-            <td> {{ $user['email'] }} </td>
+            <td>
+                <img class="user-avatar rounded-circle"
+                    src="{{ $user->social_avatar ?? 'https://fakeimg.pl/300/' }}" alt="">
+            </td>
+            <td>
+                <p class="user-info">
+                    {{ $user->name }}
+                </p>
+            </td>
+            <td>
+                <p class="user-info">
+                    {{ $user->email }}
+                </p>
+            </td>
             <td>
                 <button class="btn btn-primary"> Edit </button>
                 <button class="btn btn-danger"> Delete </button>
