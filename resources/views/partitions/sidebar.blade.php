@@ -5,6 +5,7 @@
     <a href="{{ route('admin.user.index') }}" class="nav-link">User management</a>
     <a href="{{ route('admin.role.index') }}" class="nav-link">Role management</a>
     <a href="{{ route('admin.permission.index') }}" class="nav-link">Permission management</a>
+    <a href="{{ route('admin.permission_group.index') }}" class="nav-link">Permission group management</a>
   </nav>
   <p>Catalog</p>
   <nav class="nav flex-column">

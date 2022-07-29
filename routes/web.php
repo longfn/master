@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'verified', 'verify.
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('permission', PermissionController::class);
+    Route::resource('permission_group', PermissionGroupController::class);
 });
 
 Auth::routes(['verify' => true]);
