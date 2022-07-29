@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PermissionGroup;
+use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 use Illuminate\Http\Request;
 
 class PermissionGroupController extends Controller
 {
+    public function __construct(PermissionGroupRepository $permissionGroupRepository)
+    {
+        $this->permissionGroupRepository = $permissionGroupRepository;
+    }
+
     public function index()
     {
         return view('admin.permission_group.index', [
-            'permissionGroups' => PermissionGroup::all(),
+            'permissionGroups' => $this->permissionGroupRepository->paginate(),
         ]);
     }
 

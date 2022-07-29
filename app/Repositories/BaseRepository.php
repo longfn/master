@@ -10,10 +10,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function paginate(array $input = [], $perPage = 10)
     {
+        if (empty($input)) { // Collection->all() ==> array :D
+            $input = $this->model->all()->all();
+        }
         $total = count($input);
         $page = LengthAwarePaginator::resolveCurrentPage();
         $offset = ($page - 1) * $perPage;
-        $items = array_slice($items, $offset, $perPage);
+        $items = array_slice($input, $offset, $perPage);
 
         return new LengthAwarePaginator($items, $total, $perPage, $page, [
             'path' => LengthAwarePaginator::resolveCurrentPath(),

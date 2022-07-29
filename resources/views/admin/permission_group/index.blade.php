@@ -29,6 +29,8 @@
         </tr>
         @endforeach
         @endif
+
+        {{ $permissionGroups->links() }}
     </table>
   </div>
 </div>
