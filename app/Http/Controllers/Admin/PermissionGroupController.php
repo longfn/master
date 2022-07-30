@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PermissionGroupRequest;
 use App\Models\PermissionGroup;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
-use Illuminate\Http\Request;
 
 class PermissionGroupController extends Controller
 {
@@ -23,12 +23,14 @@ class PermissionGroupController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.permission_group.create');
     }
 
-    public function store(Request $request)
+    public function store(PermissionGroupRequest $request)
     {
-        //
+        $this->permissionGroupRepository->save($request->validated());
+
+        return redirect()->route('admin.permission_group.index');
     }
 
     public function show(PermissionGroup $permissionGroup)
@@ -41,7 +43,7 @@ class PermissionGroupController extends Controller
         //
     }
 
-    public function update(Request $request, PermissionGroup $permissionGroup)
+    public function update(PermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
         //
     }
