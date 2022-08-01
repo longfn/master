@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Http\Requests\Admin\SendMailUserProfileRequest;
-use App\Models\User;
-use App\Services\MailService;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Admin\SendMailUserProfileRequest;
+use App\Services\MailService;
 
 class UserController extends Controller
 {
@@ -19,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', [
-            'users' => User::all(),
+            'users' => $this->getSessionUsers(),
         ]);
     }
 
