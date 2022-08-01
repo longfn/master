@@ -2,26 +2,16 @@
 
 namespace App\Repositories;
 
-use Illuminate\Pagination\LengthAwarePaginator;
-
 abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
 
     public function paginate(array $input = [], $perPage = 10)
     {
-        if (empty($input)) { // Collection->all() ==> array :D
-            $input = $this->model->all()->all();
-        }
-        $total = count($input);
-        $page = LengthAwarePaginator::resolveCurrentPage();
-        $offset = ($page - 1) * $perPage;
-        $items = array_slice($input, $offset, $perPage);
+        $query = $this->model->query();
+        // TODO: Handle filter() and sort() here
 
-        return new LengthAwarePaginator($items, $total, $perPage, $page, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-            'query' => LengthAwarePaginator::resolveQueryString(),
-        ]);
+        return $query->paginate($perPage);
     }
 
     public function save(array $inputs, array $conditions = ['id' => null])

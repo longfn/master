@@ -35,21 +35,29 @@ class PermissionGroupController extends Controller
 
     public function show(PermissionGroup $permissionGroup)
     {
-        //
+        return view('admin.permission_group.show', [
+            'permissionGroup' => $permissionGroup,
+        ]);
     }
 
     public function edit(PermissionGroup $permissionGroup)
     {
-        //
+        return view('admin.permission_group.edit', [
+            'permissionGroup' => $permissionGroup,
+        ]);
     }
 
     public function update(PermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        //
+        $this->permissionGroupRepository->save($request->validated(), ['id' => $permissionGroup->id]);
+
+        return redirect()->route('admin.permission_group.index');
     }
 
     public function destroy(PermissionGroup $permissionGroup)
     {
-        //
+        $this->permissionGroupRepository->deleteById($permissionGroup->id);
+
+        return redirect()->route('admin.permission_group.index');
     }
 }

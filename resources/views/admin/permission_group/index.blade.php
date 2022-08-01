@@ -23,8 +23,13 @@
                 </p>
             </td>
             <td>
+                <a href="{{ route('admin.permission_group.show', $permissionGroup) }}" class="btn btn-success"> Show </a>
                 <a href="{{ route('admin.permission_group.edit', $permissionGroup) }}" class="btn btn-primary"> Edit </a>
-                <a href="{{ route('admin.permission_group.destroy', $permissionGroup) }}" class="btn btn-danger"> Delete </a>
+                <form class="d-inline" method="post" action="{{ route('admin.permission_group.destroy', $permissionGroup) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"> Delete </button>
+                </form>
             </td>
         </tr>
         @endforeach
