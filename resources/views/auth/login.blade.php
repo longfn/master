@@ -18,6 +18,11 @@
                             {{ session('registered') }}
                         </div>
                     @endif
+                    @if (Session::has('verificationFailed'))
+                        <div class="alert alert-success" role="success">
+                            {{ session('verificationFailed') }}
+                        </div>
+                    @endif
                     @if (Session::has('verified'))
                         <div class="alert alert-success" role="success">
                             Your email address has been successfully verified.
