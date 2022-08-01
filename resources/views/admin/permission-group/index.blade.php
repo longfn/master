@@ -5,7 +5,7 @@
   <div class="d-flex justify-content-between">
     <p style="font-weight: bold;">Permission Group List</p>
     <div>
-      <a href="{{ route('admin.permission_group.create') }}" class="btn btn-primary">Create</a>
+      <a href="{{ route('admin.permission-group.create') }}" class="btn btn-primary">Create</a>
     </div>
   </div>
   <div class="table-responsive">
@@ -23,9 +23,9 @@
                 </p>
             </td>
             <td>
-                <a href="{{ route('admin.permission_group.show', $permissionGroup) }}" class="btn btn-success"> Show </a>
-                <a href="{{ route('admin.permission_group.edit', $permissionGroup) }}" class="btn btn-primary"> Edit </a>
-                <form class="d-inline" method="post" action="{{ route('admin.permission_group.destroy', $permissionGroup) }}">
+                <a href="{{ route('admin.permission-group.show', $permissionGroup->id) }}" class="btn btn-success"> Show </a>
+                <a href="{{ route('admin.permission-group.edit', $permissionGroup->id) }}" class="btn btn-primary"> Edit </a>
+                <form class="d-inline" method="post" action="{{ route('admin.permission-group.destroy', $permissionGroup->id) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"> Delete </button>

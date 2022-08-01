@@ -1,13 +1,13 @@
 @extends('layouts.admin.master')
 @section('content')
 @if (!empty($permissionGroup))
-  <form class="container-fluid" method="post" action="{{ route('admin.permission_group.update', $permissionGroup) }}">
+  <form class="container-fluid" method="post" action="{{ route('admin.permission-group.update', $permissionGroup->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
       <h3> Editing permission group: </h3>
-      <a href="{{ route('admin.permission_group.index') }}" class="btn btn-primary">
+      <a href="{{ route('admin.permission-group.index') }}" class="btn btn-primary">
         Back
       </a>
     </div>

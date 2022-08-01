@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PermissionGroupRequest;
-use App\Models\PermissionGroup;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 
 class PermissionGroupController extends Controller
@@ -16,48 +15,52 @@ class PermissionGroupController extends Controller
 
     public function index()
     {
-        return view('admin.permission_group.index', [
+        return view('admin.permission-group.index', [
             'permissionGroups' => $this->permissionGroupRepository->paginate(),
         ]);
     }
 
     public function create()
     {
-        return view('admin.permission_group.create');
+        return view('admin.permission-group.create');
     }
 
     public function store(PermissionGroupRequest $request)
     {
         $this->permissionGroupRepository->save($request->validated());
 
-        return redirect()->route('admin.permission_group.index');
+        return redirect()->route('admin.permission-group.index');
     }
 
-    public function show(PermissionGroup $permissionGroup)
+    public function show($id)
     {
-        return view('admin.permission_group.show', [
+        $permissionGroup = $this->permissionGroupRepository->findById($id);
+
+        return view('admin.permission-group.show', [
             'permissionGroup' => $permissionGroup,
         ]);
     }
 
-    public function edit(PermissionGroup $permissionGroup)
+    public function edit($id)
     {
-        return view('admin.permission_group.edit', [
+        $permissionGroup = $this->permissionGroupRepository->findById($id);
+
+        return view('admin.permission-group.edit', [
             'permissionGroup' => $permissionGroup,
         ]);
     }
 
-    public function update(PermissionGroupRequest $request, PermissionGroup $permissionGroup)
+    public function update(PermissionGroupRequest $request, $id)
     {
-        $this->permissionGroupRepository->save($request->validated(), ['id' => $permissionGroup->id]);
+        $this->permissionGroupRepository->save($request->validated(), ['id' => $id]);
 
-        return redirect()->route('admin.permission_group.index');
+        return redirect()->route('admin.permission-group.index');
     }
 
-    public function destroy(PermissionGroup $permissionGroup)
+    public function destroy($id)
     {
-        $this->permissionGroupRepository->deleteById($permissionGroup->id);
+        $this->permissionGroupRepository->deleteById($id);
 
-        return redirect()->route('admin.permission_group.index');
+        return redirect()->route('admin.permission-group.index');
     }
 }

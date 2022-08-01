@@ -1,11 +1,11 @@
 @extends('layouts.admin.master')
 @section('content')
-<form class="container-fluid" method="post" action="{{ route('admin.permission_group.store') }}">
+<form class="container-fluid" method="post" action="{{ route('admin.permission-group.store') }}">
 @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
       <h3> Create a permission group </h3>
-      <a href="{{ route('admin.permission_group.index') }}" class="btn btn-primary">
+      <a href="{{ route('admin.permission-group.index') }}" class="btn btn-primary">
         Back
       </a>
     </div>
