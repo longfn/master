@@ -9,6 +9,13 @@ class Permission extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id',
+        'name',
+        'key',
+        'permission_group_id',
+    ];
+
     public function permissionGroup()
     {
         return $this->belongsTo(PermissionGroup::class);
