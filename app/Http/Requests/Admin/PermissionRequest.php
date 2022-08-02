@@ -26,7 +26,7 @@ class PermissionRequest extends FormRequest
             'permission_group_id' => [
                 'required',
                 'numeric',
-                'min:0',
+                'gt:0',
                 Rule::exists('permission_groups', 'id'),
             ],
         ];

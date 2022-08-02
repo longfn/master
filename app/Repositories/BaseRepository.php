@@ -6,8 +6,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
 
-    public function getAll()
+    public function getAll(array $input = [])
     {
+        // TODO: Handle search() and filter() here
+
         return $this->model->all();
     }
 

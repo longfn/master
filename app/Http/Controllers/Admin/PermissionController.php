@@ -27,7 +27,7 @@ class PermissionController extends Controller
 
     public function create()
     {
-        return view('admin.permission.create', [
+        return view('admin.permission.form', [
             'permissionGroups' => $this->permissionGroupRepository->getAll(),
         ]);
     }
@@ -48,7 +48,7 @@ class PermissionController extends Controller
 
     public function edit($id)
     {
-        return view('admin.permission.edit', [
+        return view('admin.permission.form', [
             'permission' => $this->permissionRepository->findById($id),
             'permissionGroups' => $this->permissionGroupRepository->getAll(),
         ]);
