@@ -50,18 +50,24 @@
       @if (empty($permission))
         @if (empty(old('permission_group_id')))
           <option value="" selected disabled hidden> Select a permission group </option>
+          @foreach($permissionGroups as $permissionGroup)
+            <option value="{{ $permissionGroup->id }}"> {{ $permissionGroup->name }}</option>
+          @endforeach
+        @else
+          @foreach($permissionGroups as $permissionGroup)
+            <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
+          @endforeach
         @endif
-        @foreach($permissionGroups as $permissionGroup)
-          <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
-        @endforeach
       @else
-        @foreach($permissionGroups as $permissionGroup)
-          @if (empty(old('permission_group_id')))
-          <option value="{{ $permissionGroup->id }}"{{ (($permission->permissionGroup->id == $permissionGroup->id) && empty(old('permission_group_id')) ) ? ' selected' : '' }}> {{ $permissionGroup->name }} </option>
-          @else
-          <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
-          @endif
-        @endforeach
+        @if (empty(old('permission_group_id')))
+          @foreach($permissionGroups as $permissionGroup)
+            <option value="{{ $permissionGroup->id }}"{{ (($permission->permissionGroup->id == $permissionGroup->id) && empty(old('permission_group_id')) ) ? ' selected' : '' }}> {{ $permissionGroup->name }} </option>
+          @endforeach
+        @else
+          @foreach($permissionGroups as $permissionGroup)
+            <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
+          @endforeach
+        @endif
       @endif
     </select>
     @error('permission_group_id')
