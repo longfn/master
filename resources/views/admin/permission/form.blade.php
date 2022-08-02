@@ -28,7 +28,7 @@
   @endif
   <div class="container-fluid">
     <label for="name" class="form-label"> Name </label>
-    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ $permission->name ?? '' }}">
+    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ old('name', $permission->name ?? '') }}">
     @error('name')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
   </div>
   <div class="container-fluid">
     <label for="key" class="form-label"> Key </label>
-    <input name="key" type="text" class="form-control @error('key') is-invalid @enderror" id="key" placeholder="" value="{{ $permission->key ?? '' }}">
+    <input name="key" type="text" class="form-control @error('key') is-invalid @enderror" id="key" placeholder="" value="{{ old('key', $permission->key ?? '') }}">
       @error('key')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -48,13 +48,19 @@
     <label for="permission_group_id" class="form-label"> Permission Group </label>
     <select name="permission_group_id" id="permission_group_id" class="form-select @error('permission_group_id') is-invalid @enderror">
       @if (empty($permission))
-        <option value="" selected disabled hidden> Select a permission group </option>
+        @if (empty(old('permission_group_id')))
+          <option value="" selected disabled hidden> Select a permission group </option>
+        @endif
         @foreach($permissionGroups as $permissionGroup)
-          <option value="{{ $permissionGroup->id }}"> {{ $permissionGroup->name }}</option>
+          <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
         @endforeach
       @else
         @foreach($permissionGroups as $permissionGroup)
-          <option value="{{ $permissionGroup->id }}"{{ ($permission->permissionGroup->id == $permissionGroup->id) ? ' selected' : ''}}> {{ $permissionGroup->name }} </option>
+          @if (empty(old('permission_group_id')))
+          <option value="{{ $permissionGroup->id }}"{{ (($permission->permissionGroup->id == $permissionGroup->id) && empty(old('permission_group_id')) ) ? ' selected' : '' }}> {{ $permissionGroup->name }} </option>
+          @else
+          <option value="{{ $permissionGroup->id }}"{{ (old('permission_group_id') == $permissionGroup->id) ? ' selected' : '' }}> {{ $permissionGroup->name }}</option>
+          @endif
         @endforeach
       @endif
     </select>
