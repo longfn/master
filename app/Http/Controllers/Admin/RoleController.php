@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -34,8 +35,10 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
-        $role = $this->roleRepository->save($request->validated());
-        $role->permissions()->sync($request->input('permission_ids'));
+        DB::transaction(function () use ($request) {
+            $role = $this->roleRepository->save($request->validated());
+            $role->permissions()->sync($request->input('permission_ids'));
+        });
 
         return redirect()->route('admin.role.index');
     }
@@ -57,16 +60,20 @@ class RoleController extends Controller
 
     public function update(RoleRequest $request, $id)
     {
-        $role = $this->roleRepository->save($request->validated(), ['id' => $id]);
-        $role->permissions()->sync($request->input('permission_ids'));
+        DB::transaction(function () use ($request, $id) {
+            $role = $this->roleRepository->save($request->validated(), ['id' => $id]);
+            $role->permissions()->sync($request->input('permission_ids'));
+        });
 
         return redirect()->route('admin.role.index');
     }
 
     public function destroy($id)
     {
-        $this->roleRepository->findById($id)->permissions()->detach();
-        $this->roleRepository->deleteById($id);
+        DB::transaction(function () use ($id) {
+            $this->roleRepository->findById($id)->permissions()->detach();
+            $this->roleRepository->deleteById($id);
+        });
 
         return redirect()->route('admin.role.index');
     }
