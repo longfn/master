@@ -14,6 +14,7 @@ class Permission extends Model
         'name',
         'key',
         'permission_group_id',
+        'role_id',
     ];
 
     public function permissionGroup()
@@ -23,6 +24,6 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'roles_permissions');
     }
 }
